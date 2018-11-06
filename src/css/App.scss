@@ -1,0 +1,22 @@
+.App {
+  background-color: #f7f7f7;
+  height: 100vh;
+
+  .header {
+    height: 97px;
+
+    .loop11-logo {
+      width: 83px;
+      height: 37px;
+      object-fit: contain;
+      margin: 30px;
+    }
+  }
+  
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 97px);
+  }
+}
