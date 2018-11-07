@@ -1,0 +1,20 @@
+.popup {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  width: 840px;
+  height: 60px;
+  border-right: solid 1px #2cbf9d;
+  border-bottom: solid 1px #2cbf9d;
+  border-left: solid 1px #2cbf9d;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
+}
+
+.success {
+  background-color: #eafff6;
+}

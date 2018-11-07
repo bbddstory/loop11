@@ -13,26 +13,37 @@
     font-family: Lato;
     font-size: 14px;
     line-height: 40px;
-    color: #ababab;
     cursor: pointer;
   }
 
-  .scroll-container {
+  .scroll-wrap {
     position: absolute;
-    width: calc(100% - 24px);
-    height: 200px;
-    padding: 13px 8px 13px 16px;
+    width: calc(100% - 25px);
+    min-height: 40px;
+    max-height: 200px;
+    padding: 12px 10px 12px 15px;
     background-color: #fff;
     box-shadow: 0 0 3px 1px rgba(0, 0, 0, .1);
 
     .list-container {
       overflow: auto;
-      height: 100%;
+      min-height: 40px;
+      max-height: 200px;
 
       ul {
         list-style: none;
         padding: 0;
         margin: 0;
+
+        .optGroup {
+          padding: 0 0 16px 0;
+          font-weight: bold;
+          
+          &:hover {
+            background-color: #fff;
+            cursor: default;
+          }
+        }
 
         li {
           padding: 13px 16px;

@@ -1,42 +1,46 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { getData } from 'utils/conn';
+
 import 'css/Dropdown.scss';
 
 export default class Dropdown extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showList: false };
+    this.state = { showList: false, data: [], channel: '' };
+  }
+
+  componentDidMount() {
+    try {
+      const promise = getData();
+      promise.then(data => this.setState({ data: data.channels }));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   showList = () => {
     this.setState({ showList: !this.state.showList });
   }
 
+  handleClick = (e) => {
+    this.setState({ channel: e.target.innerHTML });
+    this.props.action(e.target.innerHTML);
+  }
+
   render() {
-    const { showList } = this.state;
+    const { showList, data, channel } = this.state;
 
     return (
       <React.Fragment>
         <div className="dropdown-container">
-          <input type="text" name="FirstName" value="Mickey" readOnly onClick={this.showList} />
+          <input type="text" placeholder="Select" value={channel} readOnly onClick={this.showList} />
           {showList && (
-            <div className="scroll-container">
+            <div className="scroll-wrap">
               <div className="list-container">
                 <ul>
-                  <li>Coffee</li>
-                  <li>Tea</li>
-                  <li>Milk</li>
-                  <li>Coke</li>
-                  <li>Spirit</li>
-                  <li>Beer</li>
-                  <li>Coco</li>
-                  <li>Chai</li>
-                  <li>Wine</li>
-                  <li>Juice</li>
-                  <li>Water</li>
-                  <li>Pepsi</li>
-                  <li>Sprite</li>
-                  <li>Fanta</li>
+                  <li className="optGroup">Channels</li>
+                  {data.map(el => <li key={el.name} onClick={e => this.handleClick(e)}>{el.name}</li>)}
                 </ul>
               </div>
             </div>)}
