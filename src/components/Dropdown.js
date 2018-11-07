@@ -24,8 +24,10 @@ export default class Dropdown extends React.Component {
   }
 
   handleClick = (e) => {
-    this.setState({ channel: e.target.innerHTML });
-    this.props.action(e.target.innerHTML);
+    const name = e.target.getAttribute('data-name');
+
+    this.setState({ channel: name });
+    this.props.action(name);
   }
 
   render() {
@@ -40,7 +42,7 @@ export default class Dropdown extends React.Component {
               <div className="list-container">
                 <ul>
                   <li className="optGroup">Channels</li>
-                  {data.map(el => <li key={el.name} onClick={e => this.handleClick(e)}>{el.name}</li>)}
+                  {data.map(el => <li key={el.name} data-name={el.name} onClick={e => this.handleClick(e)}>{el.name}</li>)}
                 </ul>
               </div>
             </div>)}
