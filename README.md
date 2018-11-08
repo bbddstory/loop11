@@ -10,7 +10,7 @@ Install all packages:
 
 ### `npm i`
 
-The project needs to send requests to an endpoint with CORS enabled, which prevented access (although I don't know whether that's part of the exercise). So I had to use a proxy for it. Please execute the following script:
+The project needs to send requests to an endpoint with CORS enabled, which prevented access (although I did't know whether that was part of the exercise). So I had to use a proxy for it. Please execute the following script:
 
 ### `npm run proxy`
 
