@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Dropdown from 'components/Dropdown';
 import Button from 'components/Button';
 import { postData } from 'utils/conn';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'css/Dialog.scss';
 
 export default class Dialog extends React.Component {
@@ -11,8 +12,8 @@ export default class Dialog extends React.Component {
     this.state = { channel: '' };
   }
 
-  takeAction = (status, shared, type, message) => {
-    this.props.action(status, shared, type, message);
+  takeAction = (shared, showPopup, type, message) => {
+    this.props.action(shared, showPopup, type, message);
   }
 
   selectChannel = (channel) => {
@@ -20,16 +21,21 @@ export default class Dialog extends React.Component {
   }
 
   shareVideo = () => {
-    try {
-      const promise = postData({ "channel": this.state.channel });
-      promise.then(() => this.takeAction(false, true, 'success', 'Video clip shared with Slack!'));
-    } catch (err) {
-      console.log(err);
+    const { channel } = this.state;
+
+    if (channel) {
+      postData({ "channel": channel }).then((data) => {
+        if (data.statusCode === 200) {
+          this.takeAction(false, true, 'success', 'Video clip shared with Slack!');
+        } else {
+          this.takeAction(true, true, data.body.status, data.body.error);
+        }
+      });
     }
   }
 
   render() {
-    // const { text } = this.props;
+    const { channel } = this.state;
 
     return (
       <div className="dialog">
@@ -38,11 +44,18 @@ export default class Dialog extends React.Component {
           <span className="dialog-close" onClick={() => this.takeAction(false, false)}>&times;</span>
         </div>
         <div className="dialog-center">
-          <div>Select slack channel</div>
-          <div>To share this clip, add email addresses separated by commas, then click &apos;Send&apos;.</div>
-          <div>Projects0001 Report / Task 2 / Participant 4</div>
+          <span className="text-bold">Select slack channel</span>
+          <p>To share this clip, add email addresses separated by commas, then click &apos;Send&apos;.</p>
+          <p>
+            <span><span className="text-grey">Projects0001 Report / Task 2 /</span>&nbsp;Participant 4</span>
+            <br />
+            <span>
+              <FontAwesomeIcon icon="video" className="arrow-down icon-grey" />
+              Start<span className="text-grey video-time">2:30</span>End<span className="text-grey video-time">2:30</span>
+            </span>
+          </p>
           <Dropdown action={this.selectChannel} />
-          <Button text="Share with Slack" classes="dialog-button" action={this.shareVideo} />
+          <Button text="Share with Slack" classes="dialog-button" action={this.shareVideo} disabled={!!!channel} />
         </div>
       </div>
     );

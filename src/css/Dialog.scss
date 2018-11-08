@@ -8,15 +8,15 @@
   border-radius: 2px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
+  animation: fadeIn .2s ease-out 0s 1 forwards;
 
   .dialog-header {
     display: flex;
     justify-content: space-between;
-    padding: 24px;
-    font-family: 'Lato', sans-serif;
     border-bottom: 1px solid #ddd;
-
+    
     .dialog-title {
+      padding: 24px;
       font-size: 20px;
       font-weight: bold;
       line-height: 1;
@@ -24,6 +24,7 @@
     }
 
     .dialog-close {
+      padding: 24px;
       font-size: 26px;
       line-height: .9;
       color: #333333;
@@ -34,6 +35,16 @@
   .dialog-center {
     padding: 24px;
     background-color: #f7f7f7;
+    font-size: 14px;
+    color: #333333;
+    
+    p {
+      line-height: 1.5;
+    }
+
+    .video-time {
+      margin: 0 20px 0 5px;
+    }
   }
 
   .dialog-button {

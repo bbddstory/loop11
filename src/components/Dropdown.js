@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { getData } from 'utils/conn';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'css/Dropdown.scss';
 
 export default class Dropdown extends React.Component {
@@ -26,6 +26,7 @@ export default class Dropdown extends React.Component {
   handleClick = (e) => {
     const name = e.target.getAttribute('data-name');
 
+    this.showList();
     this.setState({ channel: name });
     this.props.action(name);
   }
@@ -34,20 +35,21 @@ export default class Dropdown extends React.Component {
     const { showList, data, channel } = this.state;
 
     return (
-      <React.Fragment>
-        <div className="dropdown-container">
+      <div className="dropdown-container">
+        <span>
           <input type="text" placeholder="Select" value={channel} readOnly onClick={this.showList} />
-          {showList && (
-            <div className="scroll-wrap">
-              <div className="list-container">
-                <ul>
-                  <li className="optGroup">Channels</li>
-                  {data.map(el => <li key={el.name} data-name={el.name} onClick={e => this.handleClick(e)}>{el.name}</li>)}
-                </ul>
-              </div>
-            </div>)}
-        </div>
-      </React.Fragment>
+          <FontAwesomeIcon icon="angle-down" className="arrow-down icon-grey" />
+        </span>
+        {showList && (
+          <div className="scroll-wrap">
+            <div className="list-container">
+              <ul>
+                <li className="optGroup">Channels</li>
+                {data.map(el => <li key={el.name} data-name={el.name} onClick={e => this.handleClick(e)}>{el.name}</li>)}
+              </ul>
+            </div>
+          </div>)}
+      </div>
     );
   }
 }

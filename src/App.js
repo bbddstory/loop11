@@ -1,28 +1,43 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Loadable from 'react-loadable';
+import Loader from 'components/Loader';
 import Mask from 'components/Mask';
-import Dialog from 'components/Dialog';
 import Button from 'components/Button';
-import Popup from 'components/Popup';
 import logo from 'images/loop11-logo-green.svg';
 import 'css/App.scss';
 
-class App extends Component {
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faVideo, faCheckCircle, faExclamationCircle, faInfoCircle, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faVideo, faCheckCircle, faExclamationCircle, faInfoCircle, faAngleDown);
+
+// Code splitting
+const Popup = Loadable({
+  loader: () => import('components/Popup'),
+  loading: Loader,
+});
+
+const Dialog = Loadable({
+  loader: () => import('components/Dialog'),
+  loading: Loader,
+});
+
+class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showMask: false, showDialog: false, shared: false };
+    this.state = { showMask: false, showDialog: false, showPopup: false };
   }
 
-  openShareVideo = (status) => {
-    this.setState({ showMask: status, showDialog: status });
+  togglePopup = () => {
+    this.setState({ showPopup: !this.state.showPopup });
   }
 
-  closeShareVideo = (status, shared, type, message) => {
-    console.log(status, shared);
-    this.setState({ showMask: status, showDialog: status, shared, type, message });
+  toggleAll = (shared, showPopup, type, message) => {
+    this.setState({ showMask: shared, showDialog: shared, showPopup, type, message });
   }
 
   render() {
-    const { showMask, showDialog, shared, message, type } = this.state;
+    const { showMask, showDialog, showPopup, message, type } = this.state;
 
     return (
       <div className="App">
@@ -30,10 +45,10 @@ class App extends Component {
           <img alt="loop 11 logo" src={logo} className="loop11-logo" />
         </div>
         <div className="center">
-          {shared && <Popup type={type} message={message} />}
           {showMask && <Mask />}
-          {showDialog && <Dialog action={this.closeShareVideo} />}
-          <Button text="Click" action={() => this.openShareVideo(true)} />
+          {showPopup && <Popup type={type} message={message} action={this.togglePopup} />}
+          {showDialog && <Dialog action={this.toggleAll} />}
+          <Button text="Click" action={() => this.toggleAll(true, false)} />
         </div>
       </div>
     );

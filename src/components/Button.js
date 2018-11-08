@@ -13,14 +13,14 @@ export default class Button extends React.Component {
   }
 
   render() {
-    const { text, classes } = this.props;
+    const { disabled, classes, text } = this.props;
 
-    return <button type="button" className={classes} onClick={this.takeAction}>{text}</button>;
+    return <button type="button" disabled={disabled} className={classes} onClick={this.takeAction}>{text}</button>;
   }
 }
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
-  classes: PropTypes.string,
-  action: PropTypes.func,
+  // text: PropTypes.string.isRequired,
+  // classes: PropTypes.string,
+  // action: PropTypes.func,
 };
