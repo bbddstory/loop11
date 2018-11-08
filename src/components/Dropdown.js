@@ -11,16 +11,13 @@ export default class Dropdown extends React.Component {
   }
 
   componentDidMount() {
-    try {
-      const promise = getData();
-      promise.then(data => this.setState({ data: data.channels }));
-    } catch (err) {
-      console.log(err);
-    }
+    getData().then(data => this.setState({ data: data.channels }));
   }
 
   showList = () => {
-    this.setState({ showList: !this.state.showList });
+    const { showList } = this.state;
+
+    this.setState({ showList: !showList });
   }
 
   handleClick = (e) => {
@@ -44,7 +41,7 @@ export default class Dropdown extends React.Component {
           <div className="scroll-wrap">
             <div className="list-container">
               <ul>
-                <li className="optGroup">Channels</li>
+                <li className="opt-group">Channels</li>
                 {data.map(el => <li key={el.name} data-name={el.name} onClick={e => this.handleClick(e)}>{el.name}</li>)}
               </ul>
             </div>
@@ -55,7 +52,5 @@ export default class Dropdown extends React.Component {
 }
 
 Dropdown.propTypes = {
-//   text: PropTypes.string.isRequired,
-//   classes: PropTypes.string,
-//   openDialog: PropTypes.func,
+  action: PropTypes.func.isRequired,
 };

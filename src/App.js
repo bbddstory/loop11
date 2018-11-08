@@ -29,7 +29,9 @@ class App extends React.Component {
   }
 
   togglePopup = () => {
-    this.setState({ showPopup: !this.state.showPopup });
+    const { showPopup } = this.state;
+
+    this.setState({ showPopup: !showPopup });
   }
 
   toggleAll = (shared, showPopup, type, message) => {
@@ -37,7 +39,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { showMask, showDialog, showPopup, message, type } = this.state;
+    const { showMask, showDialog, showPopup, type, message } = this.state;
 
     return (
       <div className="App">

@@ -9,7 +9,7 @@ export default class Popup extends React.Component {
     this.state = {};
   }
 
-  takeAction = () => {
+  invokeAction = () => {
     this.props.action();
   }
 
@@ -32,14 +32,14 @@ export default class Popup extends React.Component {
     return (
       <div className={`popup ${type}`}>
         <span className="popup-msg"><FontAwesomeIcon icon={icon} />&nbsp;{message}</span>
-        <span className="popup-close" onClick={this.takeAction}>&times;</span>
+        <span className="popup-close" onClick={this.invokeAction}>&times;</span>
       </div>
     );
   }
 }
 
 Popup.propTypes = {
-  // text: PropTypes.string.isRequired,
-  // classes: PropTypes.string,
-  // action: PropTypes.func,
+  type: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  action: PropTypes.func.isRequired,
 };

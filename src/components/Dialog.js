@@ -12,7 +12,7 @@ export default class Dialog extends React.Component {
     this.state = { channel: '' };
   }
 
-  takeAction = (shared, showPopup, type, message) => {
+  invokeAction = (shared, showPopup, type, message) => {
     this.props.action(shared, showPopup, type, message);
   }
 
@@ -24,11 +24,11 @@ export default class Dialog extends React.Component {
     const { channel } = this.state;
 
     if (channel) {
-      postData({ "channel": channel }).then((data) => {
+      postData({ channel }).then((data) => {
         if (data.statusCode === 200) {
-          this.takeAction(false, true, 'success', 'Video clip shared with Slack!');
+          this.invokeAction(false, true, 'success', 'Video clip shared with Slack!');
         } else {
-          this.takeAction(true, true, data.body.status, data.body.error);
+          this.invokeAction(true, true, data.body.status, data.body.error);
         }
       });
     }
@@ -41,7 +41,7 @@ export default class Dialog extends React.Component {
       <div className="dialog">
         <div className="dialog-header">
           <span className="dialog-title">Share video clip</span>
-          <span className="dialog-close" onClick={() => this.takeAction(false, false)}>&times;</span>
+          <span className="dialog-close" onClick={() => this.invokeAction(false, false)}>&times;</span>
         </div>
         <div className="dialog-center">
           <span className="text-bold">Select slack channel</span>
@@ -55,7 +55,7 @@ export default class Dialog extends React.Component {
             </span>
           </p>
           <Dropdown action={this.selectChannel} />
-          <Button text="Share with Slack" classes="dialog-button" action={this.shareVideo} disabled={!!!channel} />
+          <Button text="Share with Slack" disabled={!channel} classes="dialog-button" action={this.shareVideo} />
         </div>
       </div>
     );
@@ -63,5 +63,5 @@ export default class Dialog extends React.Component {
 }
 
 Dialog.propTypes = {
-  // text: PropTypes.string.isRequired,
+  action: PropTypes.func.isRequired,
 };

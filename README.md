@@ -2,16 +2,24 @@
 
 A front-end exercise from Loop11.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In order to setup the project quickly and have a smoother development, it was bootstrapped with Create React App.
 
-## Available Scripts
+## How to Start
 
-In the project directory, you can run:
+Install all packages:
+
+### `npm i`
+
+The project needs to send requests to an endpoint with CORS enabled, which prevented access (although I don't know whether that's part of the exercise). So I had to use a proxy for it. Please execute the following script:
+
+### `npm run proxy`
+
+Then wait until you see this message in the terminal:
+
+### `"-- Reverse proxy running on port 5050"`
+
+Lastly use this script to start the project:
 
 ### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The browser will start automatically.
