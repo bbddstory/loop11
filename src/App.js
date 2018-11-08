@@ -6,11 +6,6 @@ import Button from 'components/Button';
 import logo from 'images/loop11-logo-green.svg';
 import 'css/App.scss';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faVideo, faCheckCircle, faExclamationCircle, faInfoCircle, faAngleDown } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faVideo, faCheckCircle, faExclamationCircle, faInfoCircle, faAngleDown);
-
 // Code splitting
 const Popup = Loadable({
   loader: () => import('components/Popup'),
