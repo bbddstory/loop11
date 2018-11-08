@@ -18,8 +18,8 @@ Then wait until you see this message in the terminal:
 
 ### `"-- Reverse proxy running on port 5050"`
 
-Lastly use this script to start the project:
+Lastly, in a different terminal use this script to start the project:
 
 ### `npm start`
 
-The browser will start automatically.
+The browser will open automatically.
