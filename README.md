@@ -2,7 +2,7 @@
 
 A front-end exercise from Loop11.
 
-In order to setup the project quickly and have a smoother development, it was bootstrapped with Create React App.
+In order to setup the project quickly and have a smoother development, it was bootstrapped with Create React App. As the UI was relatively simple, I didn't use any state container like Redux, data were passed around using props.
 
 ## How to Start
 
