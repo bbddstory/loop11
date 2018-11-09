@@ -22,4 +22,4 @@ Lastly, in a different terminal use this script to start the project:
 
 ### `npm start`
 
-The browser will open automatically.
+The browser will open automatically. Tested in Chrome v70, Firefox v63 and Microsoft Edge.
